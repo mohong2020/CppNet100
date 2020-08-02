@@ -19,12 +19,14 @@
 #include <vector>
 #include <iostream>
 #include "MessageHeader.hpp"
+#include "CELLTimestamp.hpp"
 
 #ifndef RECV_BUFF_SIZE
 //缓冲区最小单元大小
 #define RECV_BUFF_SIZE 10240
 #endif
 
+//客户端
 class ClientSocket {
 public:
 	ClientSocket(SOCKET sockfd = INVALID_SOCKET) {
@@ -62,10 +64,12 @@ class EasyTcpServer {
 private:
 	SOCKET _sock;
 	std::vector<ClientSocket*> _clients;
-
+	CELLTimestamp _tTime;	//计时
+	int _recvCount;			//计数
 public:
 	EasyTcpServer() {
 		_sock = INVALID_SOCKET;
+		_recvCount = 0;
 	}
 
 	virtual ~EasyTcpServer() {
@@ -285,6 +289,12 @@ public:
 	//响应网络消息
 	virtual void OnNetMsg(SOCKET cSock,DataHeader* header) {
 		//处理请求，根据命令，继续接收没有接收完的部分
+		_recvCount++;
+		auto t1 = _tTime.getElapsedSecond();
+		if (t1 >= 1.0) {
+			printf("time<%lf>,socket<%d>,recvCount<%d>", t1, _sock, _recvCount);
+			_tTime.update();
+		}
 		switch (header->cmd) {
 			case CMD_LOGIN:
 			{

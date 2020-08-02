@@ -2,14 +2,14 @@
 #include <thread>
 #include "EasyTcpClient.hpp"
 
-//æ§åˆ¶å°è¾“å…¥å‘½ä»¤çº¿ç¨‹å‡½æ•°
+//¿ØÖÆÌ¨ÊäÈëÃüÁîÏß³Ìº¯Êı
 void cmdThread(EasyTcpClient* client) {
 	while (true) {
 		char cmdBuf[256] = {};
 		scanf("%s", cmdBuf);
 		if (0 == strcmp(cmdBuf, "exit")) {
 			client->Close();
-			printf("å®¢æˆ·ç«¯exit\n");
+			printf("¿Í»§¶Ëexit\n");
 			//closesocket(_sock);
 			return;
 		}
@@ -25,7 +25,7 @@ void cmdThread(EasyTcpClient* client) {
 			client->SendData(&logout);
 		}
 		else {
-			printf("ä¸æ”¯æŒè¯¥å‘½ä»¤\n");
+			printf("²»Ö§³Ö¸ÃÃüÁî\n");
 		}
 	}
 }
@@ -35,18 +35,18 @@ void test1() {
 	client.InitSocket();
 	/*client.Connect("127.0.0.1", 4567);*/
 	client.Connect("192.168.16.134", 4567);
-	std::thread t1(cmdThread, &client);		//è¯¥çº¿ç¨‹ä¸»è¦ç”¨æ¥å‘é€æ•°æ®
+	std::thread t1(cmdThread, &client);		//¸ÃÏß³ÌÖ÷ÒªÓÃÀ´·¢ËÍÊı¾İ
 	t1.detach();
 	Login login;
 	strcpy(login.userName, "lyd");
 	strcpy(login.passWord, "lydmm");
-	while (client.isRun()) {		// ä¸»è¦ç”¨äºæ¥æ”¶æ¶ˆæ¯ 
+	while (client.isRun()) {		// Ö÷ÒªÓÃÓÚ½ÓÊÕÏûÏ¢ 
 		client.OnRun();
 		client.SendData(&login);
 	}
 
 	client.Close();
-	printf("å·²é€€å‡ºï¼\n");
+	printf("ÒÑÍË³ö£¡\n");
 	getchar();
 }
 
@@ -56,13 +56,13 @@ void cmdThread2() {
 		char cmdBuf[256] = {};
 		scanf("%s", cmdBuf);
 		if (0 == strcmp(cmdBuf, "exit")) {
-			printf("å®¢æˆ·ç«¯exit\n");
+			printf("¿Í»§¶Ëexit\n");
 			//closesocket(_sock);
 			g_run = false;
 			return;
 		}
 		else {
-			printf("ä¸æ”¯æŒè¯¥å‘½ä»¤\n");
+			printf("²»Ö§³Ö¸ÃÃüÁî\n");
 		}
 	}
 }

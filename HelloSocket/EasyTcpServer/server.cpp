@@ -1,19 +1,19 @@
 
 #ifdef _WIN32
-#define _WINSOCK_DEPRECATED_NO_WARNINGS 
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-#include <WinSock2.h>	//该头文件应该放在Windows.h前面，或者加一个宏定义
-#pragma comment(lib,"ws2_32.lib")	//引用相关的库
+	#define _WINSOCK_DEPRECATED_NO_WARNINGS 
+	#define WIN32_LEAN_AND_MEAN
+	#include <Windows.h>
+	#include <WinSock2.h>	//该头文件应该放在Windows.h前面，或者加一个宏定义
+	#pragma comment(lib,"ws2_32.lib")	//引用相关的库
 
 #else
-#include <unistd.h>	//uni std
-#include <arpa/inet.h>
-#include <string.h>
+	#include <unistd.h>	//uni std
+	#include <arpa/inet.h>
+	#include <string.h>
 
-#define SOCKET int
-#define INVALID_SOCKET (SOCKET)(~0)
-#define SOCKET_ERROR	       (-1)
+	#define SOCKET int
+	#define INVALID_SOCKET (SOCKET)(~0)
+	#define SOCKET_ERROR	       (-1)
 #endif
 
 #include <string>
@@ -42,6 +42,6 @@ void test1()
 int main()
 {
 	test1();
-	//system("pause");
+	system("pause");
 	return 0;
 }

@@ -1,17 +1,32 @@
-﻿生成启动时间为 2020/7/24 8:10:26。
-     1>项目“D:\myStudy\CppMillionNetwork\V1\CppNet100\HelloSocket\EasyTcpServer\EasyTcpServer.vcxproj”在节点 2 上(Build 个目标)。
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(367,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"D:\myStudy\CppMillionNetwork\V1\CppNet100\HelloSocket\../temp/Win32/Debug/EasyTcpServer\\" /Fd"D:\myStudy\CppMillionNetwork\V1\CppNet100\HelloSocket\../temp/Win32/Debug/EasyTcpServer\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt /utf-8 server.cpp
-     1>cl : 命令行 warning D9002: 忽略未知选项“/utf-8”
-         正在跳过...(未检测到相关更改)
-         server.cpp
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\myStudy\CppMillionNetwork\V1\CppNet100\HelloSocket\../bin/Win32/Debug\EasyTcpServer.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\myStudy\CppMillionNetwork\V1\CppNet100\HelloSocket\../bin/Win32/Debug\EasyTcpServer.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\myStudy\CppMillionNetwork\V1\CppNet100\HelloSocket\../bin/Win32/Debug\EasyTcpServer.lib" /MACHINE:X86 D:\myStudy\CppMillionNetwork\V1\CppNet100\HelloSocket\../temp/Win32/Debug/EasyTcpServer\server.obj
-         EasyTcpServer.vcxproj -> D:\myStudy\CppMillionNetwork\V1\CppNet100\HelloSocket\../bin/Win32/Debug\EasyTcpServer.exe
-     1>已完成生成项目“D:\myStudy\CppMillionNetwork\V1\CppNet100\HelloSocket\EasyTcpServer\EasyTcpServer.vcxproj”(Build 个目标)的操作。
-
-已成功生成。
-
-已用时间 00:00:00.18
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(367,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  server.cpp
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x116 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x117 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x11c 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x11d 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x129 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x12a 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x12e 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x131 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x133 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x18f 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x190 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x194 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x197 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x198 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x199 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x200 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x201 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x205 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x20a 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp : warning C4828: 文件包含在偏移 0x20c 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\celltimestamp.hpp(36): warning C4244: “return”: 从“__int64”转换到“double”，可能丢失数据
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\easytcpserver.hpp(88): warning C4819: 该文件包含不能在当前代码页(0)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\easytcpserver.hpp(124): warning C4819: 该文件包含不能在当前代码页(0)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\easytcpserver.hpp(127): warning C4819: 该文件包含不能在当前代码页(0)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\easytcpserver.hpp(136): warning C4819: 该文件包含不能在当前代码页(0)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\easytcpserver.hpp(139): warning C4819: 该文件包含不能在当前代码页(0)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\easytcpserver.hpp(259): warning C4819: 该文件包含不能在当前代码页(0)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  EasyTcpServer.vcxproj -> D:\myStudy\CppMillionNetwork\V1\CppNet100\HelloSocket\../bin/Win32/Debug\EasyTcpServer.exe
+  EasyTcpServer.vcxproj -> D:\myStudy\CppMillionNetwork\V1\CppNet100\HelloSocket\../bin/Win32/Debug\EasyTcpServer.pdb (Full PDB)

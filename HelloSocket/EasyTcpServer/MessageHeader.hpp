@@ -2,23 +2,32 @@
 #define _MessageHeader_hpp_
 
 #define _CRT_SECURE_NO_WARNINGS
-enum CMD {
+
+enum CMD 
+{
 	CMD_LOGIN,
 	CMD_LOGIN_RESULT,
 	CMD_LOGOUT,
 	CMD_LOGOUT_RESULT,
 	CMD_NEW_USER_JOIN,
-	CMD_ERROR
+	CMD_ERROR,
 };
 
+/*
+
+严重性	代码	说明	项目	文件	行	禁止显示状态
+错误	C2447	“{”: 缺少函数标题(是否是老式的形式表?)	EasyTcpServer	d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\messageheader.hpp	17
+
+*/
 //消息头
-struct DataHeader {
+struct DataHeader 
+{
 	DataHeader() {
 		dataLength = sizeof(DataHeader);
 		cmd = CMD_ERROR;
 	}
 	short dataLength;	//数据长度
-	short cmd;
+	CMD cmd;
 };
 
 //消息体

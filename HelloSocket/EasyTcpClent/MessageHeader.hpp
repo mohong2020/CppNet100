@@ -1,28 +1,28 @@
 #ifndef _MessageHeader_hpp_
 #define _MessageHeader_hpp_
-
 #define _CRT_SECURE_NO_WARNINGS
+
 enum CMD {
 	CMD_LOGIN,
 	CMD_LOGIN_RESULT,
 	CMD_LOGOUT,
 	CMD_LOGOUT_RESULT,
 	CMD_NEW_USER_JOIN,
-	CMD_ERROR
+	CMD_ERROR,
 };
 
-//æ¶ˆæ¯å¤´
+//ÏûÏ¢Í·
 struct DataHeader {
 	DataHeader() {
 		dataLength = sizeof(DataHeader);
 		cmd = CMD_ERROR;
 	}
-	short dataLength;	//æ•°æ®é•¿åº¦
-	short cmd;
+	short dataLength;	//Êı¾İ³¤¶È
+	CMD cmd;
 };
 
-//æ¶ˆæ¯ä½“
-//ç™»å½•
+//ÏûÏ¢Ìå
+//µÇÂ¼
 //DataPackage
 struct Login : public DataHeader {
 	Login() {
@@ -44,7 +44,7 @@ struct LoginResult : public DataHeader {
 	char data[1000 - 8];
 };
 
-//ç™»å‡º
+//µÇ³ö
 struct Logout : public DataHeader {
 	char userName[32];
 	Logout() {
