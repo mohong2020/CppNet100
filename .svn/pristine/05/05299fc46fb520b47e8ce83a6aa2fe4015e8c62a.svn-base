@@ -1,0 +1,137 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#define WIN32_LEAN_AND_MEAN
+#define _WINSOCK_DEPRECATED_NO_WARNINGS 
+
+#include <Windows.h>
+#include <WinSock2.h>	//该头文件应该放在Windows.h前面，或者加一个宏定义
+
+#pragma comment(lib,"ws2_32.lib")	//引用相关的库
+
+//建立TCP服务端
+//1 建立一个socket
+//2 绑定接受客户端连接的端口 bind
+//3 监听网络端口 listen
+//4 等待接收客户端连接accept
+//5 向客户端发送一条数据 send
+//6 关闭socket closesocket
+//建立TCP客户端
+//1 建立一个 socket
+//2 连接服务器 connect
+//3 接受服务器信息 recv
+//4 关闭socket closesocket
+
+enum CMD {
+	CMD_LOGIN,
+	CMD_LOGOUT,
+	CMD_ERROR
+};
+
+//消息头
+struct DataHeader {
+	short dataLength;	//数据长度
+	short cmd;
+};
+
+//消息体
+//登录
+//DataPackage
+struct Login {
+	char userName[32];
+	char passWord[32];
+};
+
+struct LoginResult {
+	int result;
+};
+
+//登出
+struct Logout {
+	char userName[32];
+};
+
+struct LogoutResult {
+	int result;
+};
+
+void test1()
+{
+	WORD ver = MAKEWORD(2, 2);
+	WSADATA dat;
+	WSAStartup(ver, &dat);		//开始启动
+								//#1 建立一个 socket
+	SOCKET _sock = socket(AF_INET, SOCK_STREAM, 0);
+	if (INVALID_SOCKET == _sock) {
+		std::cout << "INVALID_SOCKET == _sock" << std::endl;
+	}
+
+	//#2 连接服务器 connect
+	sockaddr_in _sin = {};
+	_sin.sin_family = AF_INET;
+	_sin.sin_port = htons(4567);	//所连接服务端的端口号
+	_sin.sin_addr.S_un.S_addr = inet_addr("127.0.0.1");
+	int ret = connect(_sock, (sockaddr*)(&_sin), sizeof(sockaddr_in));
+	if (SOCKET_ERROR == ret) {
+		std::cout << "SOCKET_ERROR == ret" << std::endl;
+	}
+
+	//#3 输入请求命令
+	while (true) {
+		printf("%s", "请输入请求命令\n");
+		char cmdBuf[128] = {};
+		scanf("%s", cmdBuf);
+		//#4 处理请求命令
+		if (0 == strcmp(cmdBuf, "exit")) {
+			break;
+		}
+		else if (0 == strcmp(cmdBuf, "login")) {
+			//#5 向服务器发送请求命令
+			Login login = { "lyd","lydmm" };
+			DataHeader dh = { sizeof(login),CMD_LOGIN };
+			send(_sock, (char*)&dh, sizeof(DataHeader), 0);		//先发数据头
+			send(_sock, (char*)&login, sizeof(login), 0);		//再发数据体
+
+			//接受服务器返回的数据
+			DataHeader retHeader = {};
+			LoginResult loginRet = {};
+			recv(_sock, (char*)&retHeader, sizeof(retHeader), 0);
+			recv(_sock, (char*)&loginRet, sizeof(loginRet), 0);
+			printf("LoginResult = %d\n", loginRet.result);
+		}
+		else if (0 == strcmp(cmdBuf, "logout")) {
+			//#5 向服务器发送请求命令
+			Logout logout = {};
+			DataHeader dh = { sizeof(logout),CMD_LOGOUT };
+			send(_sock, (char*)&dh, sizeof(dh), 0);
+			send(_sock, (char*)&logout, sizeof(logout), 0);
+
+			//接受服务器返回的数据
+			DataHeader retHeader = {};
+			LogoutResult logoutRet = {};
+			recv(_sock, (char*)&retHeader, sizeof(retHeader), 0);
+			recv(_sock, (char*)&logout, sizeof(logout),0);
+			printf("LogoutResult = %d\n", logoutRet.result);
+		}
+		else {
+			printf("输入的命令不支持，请重新输入\n");
+			
+		}
+	}
+
+
+
+	//#7 关闭socket closesocket
+	closesocket(_sock);
+
+	WSACleanup();		//进行关闭
+	printf("收到退出命令，已退出。\n");
+	getchar();
+}
+
+
+int main()
+{
+	test1();
+	//system("pause");
+	return 0;
+}

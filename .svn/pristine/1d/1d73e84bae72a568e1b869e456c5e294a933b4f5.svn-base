@@ -1,0 +1,176 @@
+#include <iostream>
+#define _WINSOCK_DEPRECATED_NO_WARNINGS 
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+#include <WinSock2.h>	//该头文件应该放在Windows.h前面，或者加一个宏定义
+
+#pragma comment(lib,"ws2_32.lib")	//引用相关的库
+
+#include <string>
+
+
+enum CMD {
+	CMD_LOGIN,
+	CMD_LOGIN_RESULT,
+	CMD_LOGOUT,
+	CMD_LOGOUT_RESULT,
+	CMD_ERROR
+};
+
+//消息头
+struct DataHeader {
+	short dataLength;	//数据长度
+	short cmd;
+};
+
+//消息体
+//登录
+//DataPackage
+struct Login : public DataHeader{
+	Login() {
+		dataLength = sizeof(Login);
+		cmd = CMD_LOGIN;
+	}
+	char userName[32];
+	char passWord[32];
+};
+
+struct LoginResult : public DataHeader{
+	LoginResult() {
+		dataLength = sizeof(LoginResult);
+		cmd = CMD_LOGIN_RESULT;
+		result = 0;
+	}
+	int result;
+};
+
+//登出
+struct Logout : public DataHeader{
+	char userName[32];
+	Logout() {
+		dataLength = sizeof(Logout);
+		cmd = CMD_LOGOUT;
+	}
+};
+
+struct LogoutResult : public DataHeader {
+	LogoutResult() {
+		dataLength = sizeof(LogoutResult);
+		cmd = CMD_LOGOUT_RESULT;
+		result = 0;
+	}
+	int result;
+};
+
+
+void test1()
+{
+	WORD ver = MAKEWORD(2, 2);
+	WSADATA dat;
+	WSAStartup(ver, &dat);		//开始启动
+
+	//#1 建立一个socket，套接字
+	SOCKET _sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	//ipv4网络，面向字节流，tcp方式
+	//判断一下sock是否创建成功
+	//...
+
+	//#2 绑定接受客户端连接的端口 bind
+	sockaddr_in _sin = {};
+	_sin.sin_family = AF_INET;
+	_sin.sin_port = htons(4567);		//端口号，将主机字节序转为网络字节序
+	_sin.sin_addr.S_un.S_addr = INADDR_ANY;		//本机的所有ip地址
+												//S_un是一个联合体
+	if (SOCKET_ERROR == bind(_sock, (sockaddr*)&_sin, sizeof(_sin))) {
+		std::cout << "SOCKET_ERROR == bind" << std::endl;
+	}
+	else {
+		std::cout << "bind 绑定端口成功" << std::endl;
+	}
+
+	//#3 监听网络端口 listen
+	if (SOCKET_ERROR == listen(_sock, 5)) {	//监听，并且允许最大连接量
+		std::cout << "SOCKET_ERROR == listen" << std::endl;
+	}
+	else {
+		std::cout << "listen成功" << std::endl;
+	}
+
+	//#4 等待接收客户端连接accept
+	sockaddr_in clientAddr = {};		//客户端的地址
+	int nLenAddr = sizeof(sockaddr_in);
+	SOCKET _cSock = INVALID_SOCKET;
+
+
+	_cSock = accept(_sock, (sockaddr*)&clientAddr, &nLenAddr);
+	if (INVALID_SOCKET == _cSock) {
+		std::cout << "INVALID_SOCKET == _cSock" << std::endl;
+	}
+	//inet_ntoa(clientAddr.sin_addr);
+	printf("有新的客户端接入，socket = %d，IP = %s\n", _cSock, inet_ntoa(clientAddr.sin_addr));
+
+	while (true) {
+		DataHeader header = {};
+		//#5 接收客户端数据
+		int nlen = recv(_cSock, (char*)&header, sizeof(DataHeader), 0);	//必须是连入客户端的socket
+		if (nlen <= 0) {
+			printf("客户端已退出，任务结束。\n");
+			break;
+		}
+		printf("收到客户端命令 = %d，数据长度 = %d\n",header.cmd,header.dataLength);
+		//#6 处理请求
+		switch (header.cmd) {
+			case CMD_LOGIN:
+			{
+				Login login = {};	//用该结构体接受客户端发过来的数据
+				recv(_cSock, (char*)&login + sizeof(DataHeader), sizeof(Login) - sizeof(DataHeader), 0);
+				//打印所收到
+				printf("收到命令 = CMD_LOGIN，数据长度 = %d，userName = %s，用户密码 = %s\n",
+					   login.dataLength,login.userName,login.passWord);
+
+				//判断用户名和密码是否正确
+				//...
+				//若登录成功
+				LoginResult logret = {};
+				send(_cSock, (char*)&logret, sizeof(LoginResult), 0);	//发送登录结果
+			}
+			break;
+			case CMD_LOGOUT:
+			{
+				Logout logout = {};
+				recv(_cSock, (char*)(&logout) + sizeof(DataHeader), sizeof(Logout) - sizeof(DataHeader), 0);
+				printf("收到命令 = CMD_LOGOUT，数据长度 = %d，userName = %s\n",
+					logout.dataLength, logout.userName);
+				
+				//客户端的登出操作
+				//...
+				LogoutResult ret = {};
+				send(_cSock, (char*)&ret, sizeof(LogoutResult), 0);
+			}
+			break;
+			default:
+			{
+				//发生了错误
+				header.cmd = CMD_ERROR;
+				header.dataLength = 0;
+				send(_cSock, (char*)&header, sizeof(DataHeader), 0);
+			}
+			break;
+		}
+	}
+
+	//#6 关闭socket closesocket
+	closesocket(_sock);
+
+	WSACleanup();		//进行关闭
+	printf("任务结束，已退出。\n");
+	getchar();
+}
+
+
+int main()
+{
+	test1();
+	system("pause");
+	return 0;
+}

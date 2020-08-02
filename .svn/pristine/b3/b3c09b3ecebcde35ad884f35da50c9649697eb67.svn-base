@@ -1,0 +1,55 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <thread>
+#include "EasyTcpClient.hpp"
+
+//控制台输入命令线程函数
+void cmdThread(EasyTcpClient* client) {
+	while (true) {
+		char cmdBuf[256] = {};
+		scanf("%s", cmdBuf);
+		if (0 == strcmp(cmdBuf, "exit")) {
+			client->Close();
+			printf("客户端exit\n");
+			//closesocket(_sock);
+			return;
+		}
+		else if (0 == strcmp(cmdBuf, "login")) {
+			Login login;
+			strcpy(login.userName, "lyd");
+			strcpy(login.passWord, "lydpw");
+			client->SendData(&login);
+		}
+		else if (0 == strcmp(cmdBuf, "logout")) {
+			Logout logout;
+			strcpy(logout.userName, "lyd");
+			client->SendData(&logout);
+		}
+		else {
+			printf("不支持该命令\n");
+		}
+	}
+}
+
+void test1() {
+	EasyTcpClient client;
+	client.InitSocket();
+	client.Connect("192.168.16.133", 4567);
+	std::thread t1(cmdThread, &client);		//该线程主要用来发送数据
+	t1.detach();
+
+	while (client.isRun()) {		// 主要用于接收消息
+		client.OnRun();
+	}
+
+	client.Close();
+	printf("已退出！\n");
+	getchar();
+}
+
+
+int main()
+{
+	test1();
+	//system("pause");
+	return 0;
+}
