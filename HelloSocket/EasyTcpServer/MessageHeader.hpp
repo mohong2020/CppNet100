@@ -13,25 +13,19 @@ enum CMD
 	CMD_ERROR,
 };
 
-/*
-
-严重性	代码	说明	项目	文件	行	禁止显示状态
-错误	C2447	“{”: 缺少函数标题(是否是老式的形式表?)	EasyTcpServer	d:\mystudy\cppmillionnetwork\v1\cppnet100\hellosocket\easytcpserver\messageheader.hpp	17
-
-*/
-//消息头
+//��Ϣͷ
 struct DataHeader 
 {
 	DataHeader() {
 		dataLength = sizeof(DataHeader);
 		cmd = CMD_ERROR;
 	}
-	short dataLength;	//数据长度
+	short dataLength;	//���ݳ���
 	CMD cmd;
 };
 
-//消息体
-//登录
+//��Ϣ��
+//��¼
 //DataPackage
 struct Login : public DataHeader {
 	Login() {
@@ -53,7 +47,7 @@ struct LoginResult : public DataHeader {
 	char data[1000 - 8];
 };
 
-//登出
+//�ǳ�
 struct Logout : public DataHeader {
 	char userName[32];
 	Logout() {

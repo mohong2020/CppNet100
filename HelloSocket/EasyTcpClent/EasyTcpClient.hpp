@@ -2,7 +2,7 @@
 #define _EasyTcpClient_hpp_
 
 #ifdef _WIN32
-
+	//#define FD_SETSIZE 1024
 	#define WIN32_LEAN_AND_MEAN
 	#define _WINSOCK_DEPRECATED_NO_WARNINGS 
 	#include <Windows.h>

@@ -3,8 +3,8 @@
 	#define _WINSOCK_DEPRECATED_NO_WARNINGS 
 	#define WIN32_LEAN_AND_MEAN
 	#include <Windows.h>
-	#include <WinSock2.h>	//璇ュご鏂囦欢搴旇鏀惧湪Windows.h鍓嶉潰锛屾垨鑰呭姞涓�涓畯瀹氫箟
-	#pragma comment(lib,"ws2_32.lib")	//寮曠敤鐩稿叧鐨勫簱
+	#include <WinSock2.h>	//该头文件应该放在Windows.h前面，或者加一个宏定义
+	#pragma comment(lib,"ws2_32.lib")	//引用相关的库
 
 #else
 	#include <unistd.h>	//uni std

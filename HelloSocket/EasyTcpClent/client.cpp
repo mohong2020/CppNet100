@@ -1,4 +1,7 @@
-#define _CRT_SECURE_NO_WARNINGS
+//
+#ifndef _CRT_SECURE_NO_WARNINGS
+	#define _CRT_SECURE_NO_WARNINGS
+#endif
 #include <thread>
 #include "EasyTcpClient.hpp"
 
@@ -33,8 +36,8 @@ void cmdThread(EasyTcpClient* client) {
 void test1() {
 	EasyTcpClient client;
 	client.InitSocket();
-	/*client.Connect("127.0.0.1", 4567);*/
-	client.Connect("192.168.16.134", 4567);
+	client.Connect("127.0.0.1", 4567);
+	//client.Connect("192.168.16.134", 4567);
 	std::thread t1(cmdThread, &client);		//该线程主要用来发送数据
 	t1.detach();
 	Login login;
@@ -68,12 +71,12 @@ void cmdThread2() {
 }
 
 void test2() {
-	const int cCount = 1000;
+	const int cCount = 63;		//最多63个
 	EasyTcpClient* client[cCount];
 	for (int n = 0; n < cCount; n++) {
 		client[n] = new EasyTcpClient();
-		//client[n]->Connect("127.0.0.1", 4567);
-		client[n]->Connect("192.168.16.134", 4567);
+		client[n]->Connect("127.0.0.1", 4567);
+		//client[n]->Connect("192.168.16.134", 4567);
 	}
 
 	std::thread t1(cmdThread2);

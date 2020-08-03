@@ -1,6 +1,8 @@
 #ifndef _MessageHeader_hpp_
 #define _MessageHeader_hpp_
-#define _CRT_SECURE_NO_WARNINGS
+#ifndef _CRT_SECURE_NO_WARNINGS
+	#define _CRT_SECURE_NO_WARNINGS
+#endif
 
 enum CMD {
 	CMD_LOGIN,
